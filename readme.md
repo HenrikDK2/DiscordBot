@@ -18,5 +18,6 @@ Lav en .env fil i roden med disse properties og udfyld værdierne.
 
 ## Funktioner
 
- - Ændring af prefix og se nurværende prefix med prefix command.
+ -  (¤prefix) Ændring af prefix og se nurværende prefix med prefix command.
+ - 	(¤randGame) Finder et tilfældig spil på steam, og prøve at finde et tilbud på allkeyshop.
 

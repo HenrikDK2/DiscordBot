@@ -22,3 +22,13 @@ client.on('message', msg => {
         }
     }
 });
+
+//Global Function
+function randMax(max) {
+    return Math.floor(Math.random() * max);
+}
+
+//Global export
+module.exports = {
+    randMax
+}
