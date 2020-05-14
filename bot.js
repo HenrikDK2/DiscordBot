@@ -2,7 +2,6 @@ require("dotenv").config();
 const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
-let port = process.env.PORT || 8080;
 let env = process.env;
 let commands = [];
 
@@ -13,7 +12,7 @@ fs.readdirSync("./commands/").forEach((file) => {
 });
 
 client.on("ready", () => {
-  /*   setInterval(async () => {
+  setInterval(async () => {
     try {
       let data = await require("./commands/reddit").run(
         "https://old.reddit.com/r/FreeGameFindings/new/",
@@ -28,7 +27,7 @@ client.on("ready", () => {
           });
       }
     } catch (error) {}
-  }, 10000); */
+  }, 10000);
 
   //Events
   client.on("message", (msg) => {
