@@ -12,8 +12,8 @@ fs.readdirSync("./commands/").forEach((file) => {
   commands.push(file.split(".js")[0]);
 });
 
-/* client.on("ready", () => {
-  setInterval(async () => {
+client.on("ready", () => {
+  /*   setInterval(async () => {
     try {
       let data = await require("./commands/reddit").run(
         "https://old.reddit.com/r/FreeGameFindings/new/",
