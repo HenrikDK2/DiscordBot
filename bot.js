@@ -12,7 +12,7 @@ fs.readdirSync("./commands/").forEach((file) => {
   commands.push(file.split(".js")[0]);
 });
 
-client.on("ready", () => {
+/* client.on("ready", () => {
   setInterval(async () => {
     try {
       let data = await require("./commands/reddit").run(
@@ -28,7 +28,7 @@ client.on("ready", () => {
           });
       }
     } catch (error) {}
-  }, 10000);
+  }, 10000); */
 
   //Events
   client.on("message", (msg) => {
