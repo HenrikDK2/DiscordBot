@@ -9,10 +9,10 @@ module.exports.run = async function (msg) {
         nodeFetch("https://store.steampowered.com/api/appdetails?appids=" + appid)
             .then(res => res.json()).then(data => {
 
-                if (data[appid].success === false || 
-                    data[appid].data.type === "movie" || 
-                    data[appid].data.type === "dlc" || 
-                    data[appid].data.type === "advertising" || 
+                if (data[appid].success === false ||
+                    data[appid].data.type === "movie" ||
+                    data[appid].data.type === "dlc" ||
+                    data[appid].data.type === "advertising" ||
                     data[appid].data.type === "demo") {
                     game();
                 } else {
@@ -23,6 +23,7 @@ module.exports.run = async function (msg) {
                 }
             })
     }
+
 
     game();
 }
