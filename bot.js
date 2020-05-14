@@ -12,6 +12,7 @@ fs.readdirSync("./commands/").forEach((file) => {
 });
 
 client.on("ready", () => {
+  /*   console.log("Bot connected");
   setInterval(async () => {
     try {
       let data = await require("./commands/reddit").run(
@@ -28,18 +29,18 @@ client.on("ready", () => {
       }
     } catch (error) {}
   }, 10000);
-});
+ */
+  //Events
+  client.on("message", (msg) => {
+    if (msg.author.bot) return;
+    let word = msg.content.split(" ")[0];
 
-//Events
-client.on("message", (msg) => {
-  if (msg.author.bot) return;
-  let word = msg.content.split(" ")[0];
-
-  for (let i = 0, l = commands.length; i < l; i++) {
-    if (word.charAt(0) === env.prefix && word.slice(1) === commands[i]) {
-      require("./commands/" + word.slice(1)).run(msg);
+    for (let i = 0, l = commands.length; i < l; i++) {
+      if (word.charAt(0) === env.prefix && word.slice(1) === commands[i]) {
+        require("./commands/" + word.slice(1)).run(msg);
+      }
     }
-  }
+  });
 });
 
 //Global Function
