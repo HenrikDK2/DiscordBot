@@ -20,7 +20,7 @@ client.on("ready", () => {
 
     if (data !== null) {
       client.channels
-        .find((channel) => channel.name === "general")
+        .find((channel) => channel.name === "gratis-spil")
         .send(`${data.title} ${data.url}`, {
           file: data.thumbnail,
         });
