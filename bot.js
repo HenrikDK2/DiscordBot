@@ -2,6 +2,7 @@ require("dotenv").config();
 const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
+//let db = restdb("df72cde69b573e89c1caf6a0193571af8c823");
 let env = process.env;
 let commands = [];
 
@@ -12,14 +13,15 @@ fs.readdirSync("./commands/").forEach((file) => {
 });
 
 client.on("ready", () => {
-  setInterval(async () => {
+  if (global.checkReddit) clearInterval(window.checkReddit);
+  global.checkReddit = setInterval(async () => {
     let data = await require("./commands/reddit").run(
       "https://old.reddit.com/r/FreeGameFindings/new/"
     );
 
     if (data !== null) {
       client.channels
-        .find((channel) => channel.name === "gratis-spil")
+        .find((channel) => channel.name === process.env.postReddit)
         .send(`${data.title} ${data.url}`, {
           file: data.thumbnail,
         });

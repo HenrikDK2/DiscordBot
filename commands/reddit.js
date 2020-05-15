@@ -33,6 +33,8 @@ module.exports.run = async function (subReddit) {
   });
   await browser.close();
   if (jsonFile === null || data.url !== jsonFile.url) {
+    if (jsonFile !== null)
+      console.log("data: " + data.url + "  jsonFile: " + jsonFile.url);
     fs.writeFileSync("data.json", JSON.stringify(data));
     return data;
   }
