@@ -26,7 +26,7 @@ client.on("ready", () => {
           });
       }
     } catch (error) {}
-  }, 5000);
+  }, 20000);
 
   //Events
   client.on("message", (msg) => {
