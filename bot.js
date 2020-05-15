@@ -11,20 +11,22 @@ fs.readdirSync("./commands/").forEach((file) => {
   commands.push(file.split(".js")[0]);
 });
 
-client.on("ready", async () => {
-  try {
-    let data = await require("./commands/reddit").run(
-      "https://old.reddit.com/r/FreeGameFindings/new/"
-    );
+client.on("ready", () => {
+  setInterval(async () => {
+    try {
+      let data = await require("./commands/reddit").run(
+        "https://old.reddit.com/r/FreeGameFindings/new/"
+      );
 
-    if (data !== null) {
-      client.channels
-        .find((channel) => channel.name === "gratis-spil")
-        .send(`${data.title} ${data.url}`, {
-          file: data.thumbnail,
-        });
-    }
-  } catch (error) {}
+      if (data !== null) {
+        client.channels
+          .find((channel) => channel.name === "gratis-spil")
+          .send(`${data.title} ${data.url}`, {
+            file: data.thumbnail,
+          });
+      }
+    } catch (error) {}
+  }, 5000);
 
   //Events
   client.on("message", (msg) => {
