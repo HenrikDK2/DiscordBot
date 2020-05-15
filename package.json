@@ -12,6 +12,9 @@
   },
   "author": "Henrik MM",
   "license": "ISC",
+  "engines": {
+    "node": "v12.0.0"
+  },
   "bugs": {
     "url": "https://github.com/HenrikDK2/DiscordBot/issues"
   },
