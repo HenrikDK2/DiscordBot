@@ -1,10 +1,15 @@
 require("dotenv").config();
 const Discord = require("discord.js");
 const fs = require("fs");
+const express = require("express");
+const app = express();
+const port = 3000;
 const client = new Discord.Client();
-//let db = restdb("df72cde69b573e89c1caf6a0193571af8c823");
 let env = process.env;
 let commands = [];
+
+app.listen(port, () => {});
+app.get("/", (req, res) => res.send("Hello World!"));
 
 //Login - Initial
 client.login(process.env.token);
