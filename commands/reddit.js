@@ -28,9 +28,9 @@ module.exports.run = async function (subReddit) {
     };
   });
   await browser.close();
-  if (jsonFile === null || jsonFile.title !== data.title) {
-    if (jsonFile !== null) console.log(jsonFile, data);
+  if (jsonFile === null || data.url !== jsonFile.url) {
     fs.writeFileSync("data.json", JSON.stringify(data));
     return data;
-  } else return null;
+  }
+  return null;
 };

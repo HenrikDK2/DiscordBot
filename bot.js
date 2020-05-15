@@ -13,19 +13,17 @@ fs.readdirSync("./commands/").forEach((file) => {
 
 client.on("ready", () => {
   setInterval(async () => {
-    try {
-      let data = await require("./commands/reddit").run(
-        "https://old.reddit.com/r/FreeGameFindings/new/"
-      );
+    let data = await require("./commands/reddit").run(
+      "https://old.reddit.com/r/FreeGameFindings/new/"
+    );
 
-      if (data !== null) {
-        client.channels
-          .find((channel) => channel.name === "gratis-spil")
-          .send(`${data.title} ${data.url}`, {
-            file: data.thumbnail,
-          });
-      }
-    } catch (error) {}
+    if (data !== null) {
+      client.channels
+        .find((channel) => channel.name === "gratis-spil")
+        .send(`${data.title} ${data.url}`, {
+          file: data.thumbnail,
+        });
+    }
   }, 20000);
 
   //Events
