@@ -2,8 +2,20 @@ require("dotenv").config();
 const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
+const http = require("http");
+const express = require("express");
+const app = express();
+app.get("/", (request, response) => {
+  console.log(Date.now() + " Ping Received");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
 let env = process.env;
 let commands = [];
+
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
 
 //Login - Initial
 client.login(process.env.token);
@@ -28,18 +40,18 @@ client.on("ready", () => {
       }
     } catch (error) {}
   }, 10000);
-});
 
-//Events
-client.on("message", (msg) => {
-  if (msg.author.bot) return;
-  let word = msg.content.split(" ")[0];
+  //Events
+  client.on("message", (msg) => {
+    if (msg.author.bot) return;
+    let word = msg.content.split(" ")[0];
 
-  for (let i = 0, l = commands.length; i < l; i++) {
-    if (word.charAt(0) === env.prefix && word.slice(1) === commands[i]) {
-      require("./commands/" + word.slice(1)).run(msg);
+    for (let i = 0, l = commands.length; i < l; i++) {
+      if (word.charAt(0) === env.prefix && word.slice(1) === commands[i]) {
+        require("./commands/" + word.slice(1)).run(msg);
+      }
     }
-  }
+  });
 });
 
 //Global Function
