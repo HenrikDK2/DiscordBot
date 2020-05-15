@@ -24,14 +24,17 @@ client.on("ready", () => {
       "https://old.reddit.com/r/FreeGameFindings/new/"
     );
 
-    if (data !== null) {
+    if (
+      data !== null &&
+      client.channels.find((channel) => channel.name === process.env.redditPost)
+    ) {
       client.channels
-        .find((channel) => channel.name === process.env.postReddit)
+        .find((channel) => channel.name === process.env.redditPost)
         .send(`${data.title} ${data.url}`, {
           file: data.thumbnail,
         });
     }
-  }, 20000);
+  }, process.env.redditUpdate);
 
   //Events
   client.on("message", (msg) => {
