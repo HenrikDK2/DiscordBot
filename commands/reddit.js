@@ -1,5 +1,4 @@
-module.exports.run = async function (subReddit, client) {
-  const Discord = require("discord.js");
+module.exports.run = async function (subReddit) {
   const fs = require("fs");
   jsonFile = null;
   if (fs.existsSync("data.json")) {
