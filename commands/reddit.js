@@ -74,7 +74,7 @@ module.exports.run = async function (subReddit) {
     }
   }
 
-  if (shouldMerge === true) {
+  if (shouldMerge === true && valid === true) {
     fs.writeFileSync("data.json", JSON.stringify(newJson));
     return data;
   }
