@@ -51,29 +51,33 @@ module.exports.run = async function (subReddit) {
     "uplay",
   ];
   let urlValid = ["bethesda", "blizzard"];
+  let valid = false;
+  titleValid.forEach((title) => {
+    if (data.title.toLowerCase().includes(title)) valid = true;
+  });
 
-  if (
-    data.title.toLowerCase().includes(titleValid) ||
-    data.url.toLowerCase().includes(urlValid)
-  ) {
-    if (jsonFile !== null) {
-      for (let i = 0; i < jsonFile.items.length; i++) {
-        if (jsonFile.items[i].url === data.url) {
-          shouldMerge = false;
-          break;
-        }
-      }
-      if (jsonFile.items.length > 7) jsonFile.items.pop();
+  urlValid.forEach((url) => {
+    if (data.url.toLowerCase().includes(url)) valid = true;
+  });
 
-      if (shouldMerge === true) {
-        newJson = { items: [data].concat(jsonFile.items) };
+  if (jsonFile !== null && valid === true) {
+    for (let i = 0; i < jsonFile.items.length; i++) {
+      if (jsonFile.items[i].url === data.url) {
+        shouldMerge = false;
+        break;
       }
     }
+    if (jsonFile.items.length > 7) jsonFile.items.pop();
 
     if (shouldMerge === true) {
-      fs.writeFileSync("data.json", JSON.stringify(newJson));
-      return data;
+      newJson = { items: [data].concat(jsonFile.items) };
     }
   }
+
+  if (shouldMerge === true) {
+    fs.writeFileSync("data.json", JSON.stringify(newJson));
+    return data;
+  }
+
   return null;
 };
