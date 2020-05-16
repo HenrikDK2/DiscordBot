@@ -35,10 +35,7 @@ module.exports.run = async function (subReddit) {
   let newJson = { items: [data] };
   if (jsonFile !== null) {
     for (let i = 0; i < jsonFile.items.length; i++) {
-      if (
-        Object.entries(jsonFile.items[i]).toString() ===
-        Object.entries(data).toString()
-      ) {
+      if (jsonFile.items[i].url() === data.url) {
         shouldMerge = false;
         break;
       }
