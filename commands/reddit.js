@@ -33,23 +33,39 @@ module.exports.run = async function (subReddit) {
   await browser.close();
   let shouldMerge = true;
   let newJson = { items: [data] };
-  if (jsonFile !== null) {
-    for (let i = 0; i < jsonFile.items.length; i++) {
-      if (jsonFile.items[i].url === data.url) {
-        shouldMerge = false;
-        break;
+  let valid = [
+    "steam",
+    "ps4",
+    "xbox",
+    "microsoft store",
+    "epic",
+    "epic games",
+    "rockstar",
+    "rockstar launcher",
+    "gog",
+    "uplay",
+    "epic launcher",
+  ];
+
+  if (data.title.toLowerCase().includes(valid)) {
+    if (jsonFile !== null) {
+      for (let i = 0; i < jsonFile.items.length; i++) {
+        if (jsonFile.items[i].url === data.url) {
+          shouldMerge = false;
+          break;
+        }
+      }
+      if (jsonFile.items.length > 7) jsonFile.items.pop();
+
+      if (shouldMerge === true) {
+        newJson = { items: [data].concat(jsonFile.items) };
       }
     }
-    if (jsonFile.items.length > 7) jsonFile.items.pop();
 
     if (shouldMerge === true) {
-      newJson = { items: [data].concat(jsonFile.items) };
+      fs.writeFileSync("data.json", JSON.stringify(newJson));
+      return data;
     }
-  }
-
-  if (shouldMerge === true) {
-    fs.writeFileSync("data.json", JSON.stringify(newJson));
-    return data;
   }
   return null;
 };
