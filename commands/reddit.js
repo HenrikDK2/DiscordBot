@@ -53,11 +53,11 @@ module.exports.run = async function (subReddit) {
   let urlValid = ["bethesda", "blizzard"];
   let valid = false;
   titleValid.forEach((title) => {
-    if (data.title.toLowerCase().includes(title)) valid = true;
+    if (data.title.toLowerCase().includes(title) === true) valid = true;
   });
 
   urlValid.forEach((url) => {
-    if (data.url.toLowerCase().includes(url)) valid = true;
+    if (data.url.toLowerCase().includes(url) === true) valid = true;
   });
 
   if (jsonFile !== null && valid === true) {
