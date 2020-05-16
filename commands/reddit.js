@@ -9,7 +9,7 @@ module.exports.run = async function (subReddit) {
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
-      "—disable-dev-shm-usage",
+      "--disable-dev-shm-usage",
     ],
   });
   const page = await browser.newPage();
@@ -52,13 +52,22 @@ module.exports.run = async function (subReddit) {
   ];
   let urlValid = ["bethesda", "blizzard"];
   let valid = false;
-  titleValid.forEach((title) => {
-    if (data.title.toLowerCase().includes(title) === true) valid = true;
-  });
 
-  urlValid.forEach((url) => {
-    if (data.url.toLowerCase().includes(url) === true) valid = true;
-  });
+  for (let i = 0; i < titleValid.length; i++) {
+    if (data.title.toLowerCase().includes(titleValid[i]) === true) {
+      valid = true;
+      break;
+    }
+  }
+
+  if (valid === false) {
+    for (let i = 0; i < urlValid.length; i++) {
+      if (data.url.toLowerCase().includes(urlValid[i]) === true) {
+        valid = true;
+        break;
+      }
+    }
+  }
 
   if (jsonFile !== null && valid === true) {
     for (let i = 0; i < jsonFile.items.length; i++) {
