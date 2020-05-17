@@ -51,7 +51,7 @@ module.exports.run = async function (subReddit) {
     "uplay",
   ];
   let urlValid = ["bethesda", "blizzard"];
-  let excludeUrl = ["givekey.ru"];
+  let excludeUrl = ["givekey.ru", ".ru"];
   let skip = false;
   let valid = false;
 
