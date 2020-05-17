@@ -21,7 +21,7 @@ client.on("ready", () => {
   if (global.checkReddit) clearInterval(window.checkReddit);
   global.checkReddit = setInterval(async () => {
     let data = await require("./commands/reddit").run(
-      "https://old.reddit.com/r/FreeGameFindings/new/"
+      "https://old.reddit.com/r/FreeGameFindings/new"
     );
 
     if (

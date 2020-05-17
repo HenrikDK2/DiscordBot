@@ -51,20 +51,31 @@ module.exports.run = async function (subReddit) {
     "uplay",
   ];
   let urlValid = ["bethesda", "blizzard"];
+  let excludeUrl = ["givekey.ru"];
+  let skip = false;
   let valid = false;
 
-  for (let i = 0; i < titleValid.length; i++) {
-    if (data.title.toLowerCase().includes(titleValid[i]) === true) {
-      valid = true;
+  for (let i = 0; i < excludeUrl.length; i++) {
+    if (data.url.toLowerCase().includes(excludeUrl[i]) === true) {
+      skip = true;
       break;
     }
   }
 
-  if (valid === false) {
-    for (let i = 0; i < urlValid.length; i++) {
-      if (data.url.toLowerCase().includes(urlValid[i]) === true) {
+  if (skip === false) {
+    for (let i = 0; i < titleValid.length; i++) {
+      if (data.title.toLowerCase().includes(titleValid[i]) === true) {
         valid = true;
         break;
+      }
+    }
+
+    if (valid === false) {
+      for (let i = 0; i < urlValid.length; i++) {
+        if (data.url.toLowerCase().includes(urlValid[i]) === true) {
+          valid = true;
+          break;
+        }
       }
     }
   }
